@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>note</title>
+        <style>
+            header {
+              background-color: lightgreen;
+              text-align: center;
+              padding: 1px;
+              outline: 1px;
+              border: 1px solid black;
+              margin-bottom: 25px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>NoteBook</h1>
+        </header>
+
+        <div style = "border:1px solid black; margin-bottom:20px;">
+            <h2>{{ name }}</h2>
+            <p>{{ content }}</p>
+        </div>
+        <div>
+            <a href="{{ url_for('main_page') }}">Home</a>
+        </div>
+    </body>
+</html>
