@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+    <script src="{{ url_for('static', filename='js/comment_button.js') }}"></script>
     <title>main</title>
   </head>
   <body>
@@ -57,6 +58,15 @@
         <button type="submit" name="action" value="find">"Search"</button>
       </form>
     </div>
+
+<!--    deleting a note-->
+    <button id="toggleButton">Delete a Note</button>
+
+      <form id="hiddenForm" action="/deleteNote" method="POST" style="display: none;">
+          <label for="deleteNote">Type the Name of the Note to Delete Here:</label>
+          <textarea id="deleteNote" name="deletedName" rows="5" cols="40"></textarea>
+          <button type="submit">Delete</button>
+      </form>
 
   </body>
 </html>

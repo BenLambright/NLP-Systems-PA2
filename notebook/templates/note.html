@@ -19,14 +19,21 @@
         </div>
 
 <!--        existing comments-->
-        <div id="noteComments">
-            <h2>{{ comments }}</h2>
+        <div>
+            {% for comment in comments %}
+                <div>
+                    <h2>{{ comment.name }}</h2>
+                    <p>{{ comment.content }}</p>
+                </div>
+            {% else %}
+                <p>No comments yet.</p>
+            {% endfor %}
         </div>
 
         <!--    Write a comment:-->
           <button id="toggleButton">Add a Comment</button>
 
-            <form id="hiddenForm" action="/submit" method="POST" style="display: none;">
+            <form id="hiddenForm" action="/submitComment" method="POST" style="display: none;">
 <!--                the firs tline is a hidden line just to store the name of the note-->
                 <input type="hidden" name="note_id" value="{{ note_id }}">
                 <label for="name">Add your comment here:</label>

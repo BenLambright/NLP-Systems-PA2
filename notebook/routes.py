@@ -18,7 +18,18 @@ from notebook import db
 api = Api(app)
 # notebook = NoteBook()
 
-@app.route('/submit', methods=['POST'])
+@app.route('/deleteNote', methods=['POST'])
+def delete_note():
+    '''Delete each note with the given name'''
+    note_name = request.form.get('deletedName')
+    notes = Note.query.filter_by(name=note_name).all()
+    for note in notes:
+        db.session.delete(note)
+        db.session.commit()
+
+    return redirect(url_for('main_page'))
+
+@app.route('/submitComment', methods=['POST'])
 def submit():
     '''Route to handle the submission request, gets the comment text and creates a new comment with it'''
     comment_text = request.form.get('comment')
@@ -26,7 +37,7 @@ def submit():
     note = Note.query.get(note_id)
     name = f"Comment under {note.name} at time {datetime.now()}"
     if comment_text:
-        new_comment = Comment(content=comment_text, note=note.name, name=name)
+        new_comment = Comment(content=comment_text, note_id=note.id, name=name)
         db.session.add(new_comment)
         db.session.commit()
     return redirect(url_for('notes_page', note_id=note_id))
@@ -84,9 +95,9 @@ def notes_page(note_id):
     '''Code to notes page, once we have found which note we are showing'''
     note = Note.query.get(note_id)
     content = note.content
-    comments = Comment.query.filter_by(note=note.name).all()
-    comment_list = [comment.content for comment in comments]
-    return render_template('note.html', name=note.name, content=content, comments=comment_list, note_id=note_id)
+    comments = Comment.query.filter_by(note_id=note.id).all()
+    # comment_list = [comment.content for comment in comments]
+    return render_template('note.html', name=note.name, content=content, comments=comments, note_id=note_id)
 
 if __name__ == '__main__':
     app.run(debug=True)
