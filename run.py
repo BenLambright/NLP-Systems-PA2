@@ -1,4 +1,3 @@
-from flask import Flask
 import notebook
 
 if __name__ == '__main__':

@@ -1,90 +1,42 @@
-# Assignment 1
+# Assignment 2
 
-Three different kind of web interfaces to a simple note taker application.
+For this assignment you will continue to work on the note-taking application and its Flask web interface. The core of the assignment is to add a database backend using Flask-SQLAlchemy, but we also add some functionailty to the note-taker and the website.
 
-Due date: February 25
+Due date: March 14
 
-This assignment has four parts:
+## Key Note
+Unlike the demo provided, to delete a note, you have to select a note to delete on the main page. You click the `delete a note button` at the buttom of the page, then type the name of the note, and it will delete that note and all of it's comments.
 
-1. simple note taking application
-2. an API to the notes, using FastAPI 
-3. a mini web site to browse and add notes, using Flask
-4. a StreamLit app to access the notes
+## New functionality for the note-taking application
 
-
-## The note taking application
-
-This should be a standalone module that will be used by the FastAPI, Flask and Streamlit interfaces. You may do this any way you want, but at the minimum the application should be able to
+For assignment 1, your note-taking application was able to do the following:
 
 - Create a note, where a note has a name and a content.
 - Return a list of all notes.
 - Return a list of notes that match a search term.
 - Return the content of a note identified by name.
 
+That would be a tad too trivial so we expand the functionality a bit. You should add the following:
 
-## The API
-
-A FastAPI script that at least has the following resources/endpoints:
-Note: all of these links will work, especially after running the POST commands!
-
-```
-http://127.0.0.1:8000/
-http://127.0.0.1:8000/list
-http://127.0.0.1:8000/find?term=moon
-http://127.0.0.1:8000/note/Wensleydale
-```
-
-The first one should return a text string with hints to the user on how to access the API. The second returns a list with all note names and the third dictionary including all notes that match the search term. And the fourth retrieves the text from a specific note.
-Note: Go ahead and try running any of these in the terminal with this directory!
-
-```shell
-$ curl http://127.0.0.1:8000/find?term=moon
-{"term":"moon","matching notes":[["Wensleydale"]]}
-$ curl http://127.0.0.1:8000/note/Wensleydale
-Isn't the moon made out of this?
-```
-
-The above are all GET requests. You also need the API to respond to a POST request which allows adding a note by handing in a dictionary or a file:
-
-```
-curl -X 'POST' \
-  'http://127.0.0.1:8000/add' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "name": "Remember my cheese",
-  "content": "I want both Gouda and Cheddar"
-}'
-```
-
-```
-curl -X 'POST' \
-  'http://127.0.0.1:8000/add' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d @note.json
-```
-
-These should return some kind of note indicating success or failure.
+- Allow comments on a note.
+- Add a date to each note and comment.
+- Delete a note and all of its comments.
 
 
-## The mini Flask website
+## New functionality
 
-In my case, the main page shows a list of all notes, a box for a search term, and an option to add a note. Once you search for a term, a box showing your search results will also appear.
-
-Each note gets it's own page.
-
-Here are the functions provided by the cite:
-
-- see all notes
-- see the content of a note
-- search for notes
-- add a note
+- When displaying a note you also get to see the comments.
+- Searches should also search the comments.
+- There must be a way to add a comment.
+- There must be a way to delete a note with its comments. See "Key Note" section.
 
 
-## The Streamlit application
+### Adding a database backend
 
-Has the same functionalities as the Flask website, but looks a little different.
+An uninitiated user won't notice this when using the Flask site, but all data have to be in a relational database. Adding the database model and adapting other code accordingly is probably going to be the biggest part of this assignment.
+
+Use SQLite as your database and use Flask-SQLAlchemy to interact with the database, no meddling directly with SQL. Given the examples you have seen in class and some examples still to come, you should know all you need to 
+do this. There is one particular problem that may get that could be hard to solve, but I will talk about it in class (short version: the easiest thing to do is to not use lazy loading).
 
 
 ## Running
@@ -92,12 +44,11 @@ Has the same functionalities as the Flask website, but looks a little different.
 You can run the scripts as follows:
 
 ```shell
-# The API
-uvicorn api:app --reload
+# Run the Requirements
+pip install -r requirements.txt
+```
 
-# The Website
-python app.py
-
-# The streamlit application
-streamlit run stream.py
+```shell
+# Run the Website Locally
+python run.py
 ```

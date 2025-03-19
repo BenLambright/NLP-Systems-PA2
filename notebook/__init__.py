@@ -2,7 +2,6 @@ from .notes import NoteBook
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
-# from notebook.models import DBNoteBook
 
 db = SQLAlchemy()
 
@@ -15,12 +14,7 @@ def create_app():
 
     with app.app_context():
         from notebook import routes
-        # print("Instance Path:", app.instance_path)
-        # print("Database Path:", os.path.join(app.instance_path, 'db.sqlite'))
         db.create_all()
-        # notebook = DBNoteBook()
-        # db.session.add(notebook)
-        # db.session.commit()
 
     return app
 
