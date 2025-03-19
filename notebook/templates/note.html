@@ -28,7 +28,7 @@
 
             <form id="hiddenForm" action="/submit" method="POST" style="display: none;">
 <!--                the firs tline is a hidden line just to store the name of the note-->
-                <input type="hidden" name="note" value="{{ name }}">
+                <input type="hidden" name="note_id" value="{{ note_id }}">
                 <label for="name">Add your comment here:</label>
                 <textarea id="name" name="comment" rows="5" cols="40"></textarea>
                 <button type="submit">Add</button>
