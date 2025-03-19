@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+        <script src="{{ url_for('static', filename='js/comment_button.js') }}"></script>
+        <title>note</title>
+        <style>
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>NoteBook</h1>
+        </header>
+
+        <div>
+            <h2>{{ name }}</h2>
+            <p>{{ content }}</p>
+        </div>
+
+<!--        existing comments-->
+        <div id="noteComments">
+            <h2>{{ comments }}</h2>
+        </div>
+
+        <!--    Write a comment:-->
+          <button id="toggleButton">Add a Comment</button>
+
+            <form id="hiddenForm" action="/submit" method="POST" style="display: none;">
+<!--                the firs tline is a hidden line just to store the name of the note-->
+                <input type="hidden" name="note" value="{{ name }}">
+                <label for="name">Add your comment here:</label>
+                <textarea id="name" name="comment" rows="5" cols="40"></textarea>
+                <button type="submit">Add</button>
+            </form>
+
+        <div style="margin-top:30px; border:white;">
+            <a href="{{ url_for('main_page') }}">Home</a>
+        </div>
+    </body>
+</html>

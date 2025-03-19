@@ -1,18 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-<!--    <link rel="stylesheet" href="main.css"/>-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
     <title>main</title>
-    <style>
-    header {
-      background-color: lightgreen;
-      text-align: center;
-      padding: 1px;
-      outline: 1px;
-      border: 1px solid black;
-      margin-bottom: 25px;
-    }
-    </style>
   </head>
   <body>
     <header>
@@ -20,7 +10,7 @@
     </header>
 
 <!--    Search box:-->
-    <div style = margin-bottom:20px;>
+    <div style = border:none;>
       <form action="{{ url_for('main_page') }}" method="POST">
         <label for="term">Search term:</label><br>
         <input type="text" id="term" name="term"><br>
@@ -30,24 +20,24 @@
 
 <!--    Search results:-->
     {% if searches %}
-      <div style = "border:1px solid black; margin-bottom:20px;">
+      <div>
         <h3>Search Results: </h3>
         {% for found in searches %}
-          <p style = color:darkblue>{{ found }}</p>
+          <p>{{ found }}</p>
         {% endfor %}
       </div>
     {% endif %}
 
 <!--    All notes-->
-    <div style = "border:1px solid black; margin-bottom:20px;">
+    <div>
       <h3>All Notes</h3>
       {% for note in notes %}
-        <p style = color:darkblue>{{ note }}</p>
+        <p>{{ note }}</p>
       {% endfor %}
     </div>
 
 
-    <div  style = "border:1px solid black; margin-bottom:20px;">
+    <div>
       <h3>Add a Note</h3>
       <form action="{{ url_for('main_page') }}" method="POST">
         <label for="name">Name:</label><br>
@@ -59,9 +49,9 @@
     </div>
 
 <!--    View a note:-->
-    <div style = "border:1px solid black; margin-bottom:20px;">
+    <div>
       <h3>View a Note</h3>
-      <form action="{{ url_for('notes_page') }}" method="POST">
+      <form action="{{ url_for('find_note') }}" method="POST">
         <label for="note">View Note:</label><br>
         <input type="text" id="note" name="note"><br>
         <button type="submit" name="action" value="find">"Search"</button>

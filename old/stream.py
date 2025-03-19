@@ -1,6 +1,6 @@
 """
 
-Flask implementation of the notes app
+Streamlit implementation of the notes app
 
 """
 

@@ -1,0 +1,17 @@
+header {
+      background-color: lightgreen;
+      text-align: center;
+      padding: 1px;
+      outline: 1px;
+      border: 1px solid black;
+      margin-bottom: 25px;
+    }
+
+div {
+    border:1px solid black;
+    margin-bottom:20px;
+}
+
+p {
+    color:darkblue;
+}
