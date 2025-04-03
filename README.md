@@ -1,13 +1,33 @@
-# Assignment 2
+# Assignment 3
 
-For this assignment you will continue to work on the note-taking application and its Flask web interface. The core of the assignment is to add a database backend using Flask-SQLAlchemy, but we also add some functionailty to the note-taker and the website.
+In this assignment, we are containerizing our website.
 
-Due date: March 14
+Due date: April 4
+
+## Running the container
+
+### Building the container
+Firstly, you will have to build the container. Make sure you put in the correct directory when running that line, I would recommend just cd'ing to the head of the direcory so you can just use . here.
+```shell
+# Build the image
+docker build -t assignment3 [REPO DIR]
+```
+
+Next, all you need to do is run the image. Firstly, I have exposed the image to be on 5000, so make sure you put [your port]:5000.
+Also, in order to ensure that the data you add to the backend is updated, make sure to mount the db. To do this, just mount the repo dir.
+In my tests, I just did $(pwd)/instance:... but make sure that you virtually share this file on docker desktop so you can access it
+from Docker -> Preferences... -> Resources -> File Sharing.
+```shell
+# Run the image
+docker run -p [PORT]:5000 -v [REPO DIR]/instance:/app/instance systems3
+```
+
+Finally, open the website with the local website page you picked a port for, such as http://localhost:[PORT]
 
 ## Key Note
-Unlike the demo provided, to delete a note, you have to select a note to delete on the main page. You click the `delete a note button` at the buttom of the page, then type the name of the note, and it will delete that note and all of it's comments.
+Unlike the demo provided for assignment 2, to delete a note, you have to select a note to delete on the main page. You click the `delete a note button` at the buttom of the page, then type the name of the note, and it will delete that note and all of it's comments.
 
-## New functionality for the note-taking application
+## Assignment 2 functionality for the note-taking application
 
 For assignment 1, your note-taking application was able to do the following:
 
@@ -23,7 +43,7 @@ That would be a tad too trivial so we expand the functionality a bit. You should
 - Delete a note and all of its comments.
 
 
-## New functionality
+## Assignment 2 New functionality
 
 - When displaying a note you also get to see the comments.
 - Searches should also search the comments.
@@ -37,18 +57,3 @@ An uninitiated user won't notice this when using the Flask site, but all data ha
 
 Use SQLite as your database and use Flask-SQLAlchemy to interact with the database, no meddling directly with SQL. Given the examples you have seen in class and some examples still to come, you should know all you need to 
 do this. There is one particular problem that may get that could be hard to solve, but I will talk about it in class (short version: the easiest thing to do is to not use lazy loading).
-
-
-## Running
-
-You can run the scripts as follows:
-
-```shell
-# Run the Requirements
-pip install -r requirements.txt
-```
-
-```shell
-# Run the Website Locally
-python run.py
-```
